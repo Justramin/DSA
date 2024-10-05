@@ -155,7 +155,8 @@ class TrieNode {
       }
       node.isEndOfWord = true;
     }
-        search(word) {
+    
+    search(word) {
       let node = this.root;
       for (let char of word) {
         if (!node.children[char]) {
@@ -165,6 +166,8 @@ class TrieNode {
       }
       return node.isEndOfWord;
     }
+
+
     delete(word) {
       this._delete(this.root, word, 0);
     }
@@ -187,6 +190,7 @@ class TrieNode {
       }
       return false;
     }
+    
 
   }
   // Example usage:
