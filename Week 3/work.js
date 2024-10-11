@@ -3,7 +3,7 @@
 
 
 
-class node{
+class Node{
     constructor(value){
         this.value= value
         this.left =null
@@ -11,7 +11,7 @@ class node{
     }
 }
 
-class binarySearchTree{
+class BinarySearchTree {
     constructor(){
         this.root=null
     }
@@ -21,7 +21,7 @@ class binarySearchTree{
     }
 
     insert(value){
-        const newNode = new node(value)
+        const newNode = new Node(value)
         if(this.isEmpty()){
             this.root=newNode
         }else{
@@ -44,11 +44,11 @@ class binarySearchTree{
             }
         }
     }
-    preOrder(node=this.root){
-        if(node){
-            console.log(node.value);
-            this.preOrder(node.left)
-            this.preOrder(node.right)
+    preOrder(Node=this.root){
+        if(Node){
+            console.log(Node.value);
+            this.preOrder(Node.left)
+            this.preOrder(Node.right)
             
         }
     }
@@ -110,7 +110,7 @@ class binarySearchTree{
 
     deleteNode(root,value){
         if(root===null){
-            return root
+            return root;
         }
         if(value<root.value){
             root.left=this.deleteNode(root.left,value)
@@ -131,20 +131,20 @@ class binarySearchTree{
         return root
     }
 
-    findLeafNodes(node = this.root, leaves = []) {
-        if (node) {
-            if (!node.left && !node.right) {
-                leaves.push(node.value);
+    findLeafNodes(Node = this.root, leaves = []) {
+        if (Node) {
+            if (!Node.left && !Node.right) {
+                leaves.push(Node.value);
             }
-            this.findLeafNodes(node.left, leaves);
-            this.findLeafNodes(node.right, leaves);
+            this.findLeafNodes(Node.left, leaves);
+            this.findLeafNodes(Node.right, leaves);
         }
         return leaves;
     }
 
 
-    FindSecondLargest() {
-        if (this.root === null || (this.root.left === null && this.root.right === null)) {
+    findSecondLargest() {
+        if (!this.root || (!this.root.left && !this.root.right)) {
             return null; 
         }
     
@@ -172,7 +172,7 @@ class binarySearchTree{
 }
 
 
-const bst = new binarySearchTree()
+const bst = new BinarySearchTree ()
 
 console.log(bst.isEmpty());
 bst.insert(10)
@@ -201,4 +201,4 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(5)
 
-console.log("Second Largest is: ",bst.FindSecondLargest());
+console.log("Second Largest is: ",bst.findSecondLargest());

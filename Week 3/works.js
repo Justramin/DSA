@@ -139,6 +139,156 @@
 
 
 
+// class node{
+//     constructor(value){
+//         this.value = value
+//         this.right = null
+//         this.left = null
+//     }
+// }
+
+// class binarySearchTree{
+//     constructor(){
+//         this.root = null
+//     }
+
+//     isEmpty(){
+//         return this.root===null
+//     }
+
+//     nodesInLeft(root){
+//         let count = 0
+//        if(!root){
+//         console.log('its empty');
+        
+//        }
+       
+//         while(root.left){
+//             count ++
+//             root=root.left
+//         }
+       
+//        return count
+//     }
+//     insert(value){
+//         const newNode = new node(value)
+//         if(this.isEmpty()){
+//             this.root=newNode
+//         }else{
+//             this.insertNode(this.root,newNode)
+//         }
+//     }
+
+//     insertNode(root,newNode){
+//         if(root.value<newNode.value){
+//             if(root.left===null){
+//                 root.left = newNode
+//             }else{
+//                 this.insertNode(root.left,newNode)
+//             }
+//         }else{
+//             if(root.right===null){
+//                 root.right=newNode
+//             }else{
+//                 this.insertNode(root.right,newNode)
+//             }
+//         }
+//     }
+// }
 
 
 
+// const bst  =new binarySearchTree()
+
+// bst.insert(10)
+// bst.insert(5)
+// bst.insert(4)
+// bst.insert(2)
+// console.log(`left node count: ${bst.nodesInLeft(bst.root)}`);
+
+// console.log(bst.isEmpty());
+
+
+
+
+
+
+class MaxHeap {
+    constructor() {
+        this.heap = [];
+    }
+
+    parentIndex(index) {
+        return Math.floor((index - 1) / 2);
+    }
+
+    leftIndex(index) {
+        return 2 * index + 1;
+    }
+
+    rightIndex(index) {
+        return 2 * index + 2;
+    }
+
+    swap(index1, index2) {
+        [this.heap[index1], this.heap[index2]] = [this.heap[index2], this.heap[index1]];
+    }
+
+    insert(value) {
+        this.heap.push(value);
+        this.heapifyup();
+    }
+
+    heapifyup() {
+        let index = this.heap.length - 1;
+        while (index > 0) {
+            let parentIdx = this.parentIndex(index);
+            if (this.heap[parentIdx] < this.heap[index]) {
+                this.swap(parentIdx, index);
+                index = parentIdx;
+            } else {
+                break;
+            }
+        }
+    }
+
+    heapifydown(index) {
+        let largest = index;
+        let leftIdx = this.leftIndex(index);
+        let rightIdx = this.rightIndex(index);
+
+        if (leftIdx < this.heap.length && this.heap[leftIdx] > this.heap[largest]) {
+            largest = leftIdx;
+        }
+
+        if (rightIdx < this.heap.length && this.heap[rightIdx] > this.heap[largest]) {
+            largest = rightIdx;
+        }
+
+        if (largest !== index) {
+            this.swap(index, largest);
+            this.heapifydown(largest);
+        }
+    }
+
+    extractMax() {
+        if (this.heap.length === 0) {
+            return null;
+        }
+        if (this.heap.length === 1) {
+            return this.heap.pop();
+        }
+        let max = this.heap[0];
+        this.heap[0] = this.heap.pop();
+        this.heapifydown(0);
+        return max;
+    }
+}
+
+const heap = new MaxHeap();
+
+heap.insert(44);
+heap.insert(42);
+heap.insert(4);
+heap.insert(74);
+heap.insert(24);
